@@ -1,0 +1,27 @@
+name: TheBindingOfIsaac
+version: ${project.version}
+main: ak.isaac.theminingofisaac.TheMiningOfIsaac
+api-version: 1.16
+prefix: Plugin gestartet
+authors: [ Anselm ]
+description: The Binding of Isaac in Minecraft
+website: akoch3@stud.hs-heilbronn.de
+
+
+commands:
+  spawnenemie:
+    description: Spawnt Gegner deiner Wahl
+    usage: /<command> <enemy>
+    permission: ak.isaac.thebindingofisaac.permission
+  spawnprojectile:
+    description: Spawnt Partikel die als Projectile dienen
+    usage: /spawnprojectile
+    permission: ak.isaac.thebindingofisaac.permission
+  spawnroom:
+    description: Spawnt einen Raum
+    usage: /spawnroom <room>
+    permission: ak.isaac.thebindingofisaac.permission
+  deleteblocks:
+    description: Löscht alle Blöcke die gesetzt wurden
+    usage: /deleteblocks
+    permission: ak.isaac.thebindingofisaac.permissio
