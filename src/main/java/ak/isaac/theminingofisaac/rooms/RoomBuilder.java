@@ -1,8 +1,10 @@
 package ak.isaac.theminingofisaac.rooms;
 
 import ak.isaac.theminingofisaac.TheMiningOfIsaac;
+import ak.isaac.theminingofisaac.enemies.Enemy;
 import ak.isaac.theminingofisaac.helper.ConfigHelper;
 import ak.isaac.theminingofisaac.helper.MathHelper;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.configuration.InvalidConfigurationException;
@@ -28,7 +30,30 @@ public class RoomBuilder {
         buildWallAddZ(player, width, height,length, materials);
         buildWallAddX(player, width, height,length, materials);
         buildWallSubtractZ(player, width, height,length, materials);
+        spawnEnemiesInRoom(room, player);
 
+    }
+
+    public void spawnEnemiesInRoom(Room room, Player player){
+        Location[][] locations = room.getFloorTiles();
+        Enemy enemy = room.getEnemies()[0];
+        int[][] spawnLocations = room.getEnemySpawnLocation();
+        int x,y=0;
+        Location[] locationSpawnEnemy = new Location[locations[0].length];
+        for (int i = 0; i < spawnLocations.length; i++) {
+            x = spawnLocations[i][0];
+            for (int j = 0; j < spawnLocations[i].length; j++) {
+                y = spawnLocations[i][j];
+
+            }
+            locationSpawnEnemy[i] = locations[x][y];
+            System.out.println(locations[x][y].toString());
+        }
+
+        for(int i = 0; i < locationSpawnEnemy.length-1; i++) {
+            System.out.println(locationSpawnEnemy.length);
+            player.getWorld().spawnEntity(locationSpawnEnemy[i], enemy.getEntityType());
+        }
     }
 
     //Baut den Boden
@@ -48,17 +73,16 @@ public class RoomBuilder {
 
 
             for(int i2=0; i2 < width; i2++) {
-
+                Location parseLocation = location;
                 //Zufälliger Block auswählen für die Y-Achse
                 int randomMaterialHeight = TheMiningOfIsaac.mathHelper.getRandomInt(0, materials.length);
                 Material randomMaterial2 = materials[randomMaterialHeight];
-
                 if(i2 != 0) {
                     location.add(0, 0, 1);
                     location.getBlock().setType(randomMaterial2);
                     roomManager.getPlacedBlocks().add(location.getBlock());
+                    room.setFloorTiles(i,i2,parseLocation);
                 }
-
             }
         }
         roomManager.saveBlockLocations();

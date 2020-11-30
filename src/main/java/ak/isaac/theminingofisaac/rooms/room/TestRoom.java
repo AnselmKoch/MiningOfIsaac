@@ -15,6 +15,7 @@ public class TestRoom extends Room {
 
 
     public TestRoom() {
-        super("TestRoom", 10, 10,10, new Enemy[]{new TestEnemy(), new DummyEnemy()}, new Material[]{Material.STONE_BRICKS, Material.SMOOTH_STONE, Material.COBBLESTONE}, 3,3);
+        super("TestRoom", 10, 10,10, new Enemy[]{new TestEnemy(), new DummyEnemy()}
+       , new int[][]{{2,2},{4,4},{5,4},{7,2}},new Material[]{Material.STONE_BRICKS, Material.SMOOTH_STONE, Material.COBBLESTONE}, 3,3);
     }
 }

@@ -5,6 +5,7 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Room {
 
@@ -15,18 +16,20 @@ public class Room {
     private int width;
     private int length;
     private float x,y,z;
-    private int[][] floorTiles;
+    private int[][] enemySpawnLocation;
+    private Location[][] floorTiles;
 
 
-    public Room(String roomname, int height,int length, int width, Enemy[] enemies, Material[] materials, float x, float z) {
+    public Room(String roomname, int height,int length, int width, Enemy[] enemies, int[][] enemySpawnLocation, Material[] materials, float x, float z) {
         this.roomname = roomname;
         this.enemies = enemies;
         this.materials = materials;
+        this.enemySpawnLocation = enemySpawnLocation;
         this.height = height;
         this.width = width;
         this.length = length;
 
-        this.floorTiles = new int[this.length][this.width];
+        this.floorTiles = new Location[this.length][this.width];
     }
 
     public void setEnemies() {
@@ -45,15 +48,12 @@ public class Room {
         this.roomname = roomname;
     }
 
-    public Enemy[] getEnemies() {
-        return enemies;
-    }
 
     public Material[] getMaterials() {
         return materials;
     }
 
-    public int[][] getFloorTiles() {
+    public Location[][] getFloorTiles() {
         return floorTiles;
     }
 
@@ -93,12 +93,35 @@ public class Room {
         this.z = z;
     }
 
-    public void setFloorTiles(int a, int b, int value) {
+    public void setFloorTiles(int a, int b, Location location) {
         for(int i = 0; i < a; i++) {
             for(int j = 0; j < b; j++) {
-                floorTiles[i][j] = value;
+                floorTiles[i][j] = location;
             }
         }
     }
 
+    public String getAllFloorTiles() {
+        String s = "";
+        try {
+            for (int i = 0; i < this.getFloorTiles().length; i++) {
+                for (int j = 0; j < this.getFloorTiles()[i].length; j++) {
+                    s += this.getFloorTiles()[i][j];
+                }
+                s += '\n';
+            }
+        }
+        catch (NullPointerException exception) {
+            System.out.println("EXCEPTION");
+        }
+        return s;
+    }
+
+    public Enemy[] getEnemies() {
+        return enemies;
+    }
+
+    public int[][] getEnemySpawnLocation() {
+        return enemySpawnLocation;
+    }
 }
