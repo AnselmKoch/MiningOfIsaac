@@ -39,19 +39,20 @@ public class RoomBuilder {
         Enemy enemy = room.getEnemies()[0];
         int[][] spawnLocations = room.getEnemySpawnLocation();
         int x,y=0;
-        Location[] locationSpawnEnemy = new Location[locations[0].length];
-        for (int i = 0; i < spawnLocations.length; i++) {
+        Location[] locationSpawnEnemy = new Location[room.getEnemySpawnLocation().length];
+        for (int i = 0; i < spawnLocations.length-1; i++) {
             x = spawnLocations[i][0];
             for (int j = 0; j < spawnLocations[i].length; j++) {
                 y = spawnLocations[i][j];
 
             }
             locationSpawnEnemy[i] = locations[x][y];
-            System.out.println(locations[x][y].toString());
         }
 
         for(int i = 0; i < locationSpawnEnemy.length-1; i++) {
+
             System.out.println(locationSpawnEnemy.length);
+            System.out.println(locationSpawnEnemy[i]);
             player.getWorld().spawnEntity(locationSpawnEnemy[i], enemy.getEntityType());
         }
     }
